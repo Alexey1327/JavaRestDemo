@@ -15,41 +15,41 @@ import javax.servlet.ServletException;
 @RestController
 public class CarController {
 
-    private PersonRepositoryInterface personRepository;
+//    private PersonRepositoryInterface personRepository;
+//
+//    private CarRepositoryInterface carRepository;
+//
+//    @Autowired
+//    public CarController(
+//            PersonRepositoryInterface personRepository,
+//            CarRepositoryInterface carRepository
+//    ) {
+//        this.personRepository = personRepository;
+//        this.carRepository = carRepository;
+//    }
 
-    private CarRepositoryInterface carRepository;
-
-    @Autowired
-    public CarController(
-            PersonRepositoryInterface personRepository,
-            CarRepositoryInterface carRepository
-    ) {
-        this.personRepository = personRepository;
-        this.carRepository = carRepository;
-    }
-
-    @PostMapping("/car")
-    @Transactional
-    public ResponseEntity carSaveAction() throws ServletException {
-        int personId = 1;
-
-        Person person = personRepository.getById((long)personId);
-
-        if (person == null) {
-            throw new ServletException("Person not found");
-        }
-
-        Car car = new Car(
-                (long)1,
-                "BMW",
-                "X5",
-                157,
-                person
-        );
-        carRepository.saveCar(car);
-
-        return ResponseEntity.ok().build();
-    }
+//    @PostMapping("/car")
+//    @Transactional
+//    public ResponseEntity carSaveAction() throws ServletException {
+//        long personId = 1;
+//
+//        Person person = personRepository.findOne(personId);
+//
+//        if (person == null) {
+//            throw new ServletException("Person not found");
+//        }
+//
+//        Car car = new Car(
+//                (long)1,
+//                "BMW",
+//                "X5",
+//                157,
+//                person
+//        );
+//        carRepository.save(car);
+//
+//        return ResponseEntity.ok().build();
+//    }
 
 //    @GetMapping("personwithcars")
 //    public ResponseEntity personAndCarsAction()

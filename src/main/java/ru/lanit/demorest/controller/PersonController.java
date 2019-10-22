@@ -16,7 +16,6 @@ public class PersonController {
 
     private PersonRepositoryInterface personRepository;
 
-    @Autowired
     public PersonController(PersonRepositoryInterface personRepository) {
         this.personRepository = personRepository;
     }
