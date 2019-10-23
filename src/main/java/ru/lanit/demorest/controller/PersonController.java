@@ -26,16 +26,15 @@ public class PersonController {
         @RequestBody PersonSaveRequest personSaveRequest
     ) throws ServletException {
 
-        throw new ServletException("WTF!");
 
-//        Person person = new Person(
-//                (long) 1,
-//            "Aleksey",
-//                Date.valueOf("1990-03-01")
-//        );
-//        personRepository.savePerson(person);
-//
-//        return ResponseEntity.ok().build();
+        Person person = new Person(
+                (long) 1,
+            "Aleksey",
+                Date.valueOf("1990-03-01")
+        );
+        personRepository.savePerson(person);
+
+        return ResponseEntity.ok().build();
     }
 
 }
