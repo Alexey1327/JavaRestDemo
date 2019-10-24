@@ -9,4 +9,6 @@ public interface PersonRepositoryInterface {
     Person getById(Long peopleId);
 
     Long countAll();
+
+    void deleteAll();
 }

@@ -11,4 +11,6 @@ public interface CarRepositoryInterface {
     Long countAll();
 
     Long uniqueVendorCountAll();
+
+    void deleteAll();
 }

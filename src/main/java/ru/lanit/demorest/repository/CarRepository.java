@@ -49,4 +49,9 @@ public class CarRepository implements CarRepositoryInterface {
 
         return result.longValue();
     }
+
+    @Override
+    public void deleteAll() {
+        getSession().createNativeQuery("DELETE from car").executeUpdate();
+    }
 }

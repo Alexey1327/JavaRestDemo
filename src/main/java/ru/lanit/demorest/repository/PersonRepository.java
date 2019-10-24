@@ -37,8 +37,13 @@ public class PersonRepository implements PersonRepositoryInterface {
 
     @Override
     public Long countAll() {
-        BigInteger result = (BigInteger) getSession().createNativeQuery("SELECT COUNT(1) AS cnt FROM car").getSingleResult();
+        BigInteger result = (BigInteger) getSession().createNativeQuery("SELECT COUNT(1) AS cnt FROM person").getSingleResult();
 
         return result.longValue();
+    }
+
+    @Override
+    public void deleteAll() {
+        getSession().createNativeQuery("DELETE from person").executeUpdate();
     }
 }
