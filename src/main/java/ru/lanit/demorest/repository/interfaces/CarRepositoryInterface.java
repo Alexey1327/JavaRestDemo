@@ -6,4 +6,5 @@ public interface CarRepositoryInterface {
 
     void saveCar(Car car);
 
+    Car getById(Long carId);
 }

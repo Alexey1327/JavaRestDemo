@@ -1,7 +1,7 @@
 package ru.lanit.demorest.entity;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -10,13 +10,13 @@ public class Person {
 
     @Id
     @Column(name = "id")
-    private Long id;
+    private long id;
 
     @Column(name = "name", nullable = false)
     private String name;
 
     @Column(name = "birth_date", nullable = false)
-    private Date birthDate;
+    private LocalDate birthDate;
 
     @OneToMany(mappedBy = "person", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Car> carList;
@@ -25,7 +25,7 @@ public class Person {
 
     }
 
-    public Person(Long id, String name, Date birthDate) {
+    public Person(Long id, String name, LocalDate birthDate) {
         this.id = id;
         this.name = name;
         this.birthDate = birthDate;
@@ -35,7 +35,7 @@ public class Person {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -47,11 +47,11 @@ public class Person {
         this.name = name;
     }
 
-    public Date getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthdate) {
+    public void setBirthDate(LocalDate birthdate) {
         this.birthDate = birthdate;
     }
 

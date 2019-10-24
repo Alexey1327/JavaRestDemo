@@ -27,4 +27,9 @@ public class CarRepository implements CarRepositoryInterface {
     public void saveCar(Car car) {
         getSession().save(car);
     }
+
+    @Override
+    public Car getById(Long carId) {
+        return getSession().get(Car.class, carId);
+    }
 }

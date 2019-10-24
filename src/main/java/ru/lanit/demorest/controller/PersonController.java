@@ -1,15 +1,14 @@
 package ru.lanit.demorest.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import ru.lanit.demorest.entity.Person;
 import ru.lanit.demorest.repository.interfaces.PersonRepositoryInterface;
 import ru.lanit.demorest.request.PersonSaveRequest;
 
-import javax.servlet.ServletException;
-import java.sql.Date;
+import javax.validation.Valid;
 
 @RestController
 public class PersonController {
@@ -22,19 +21,16 @@ public class PersonController {
     }
 
     @PostMapping("/person")
+    @Transactional
     public ResponseEntity personSaveAction(
-        @RequestBody PersonSaveRequest personSaveRequest
-    ) throws ServletException {
-
-
-        Person person = new Person(
-                (long) 1,
-            "Aleksey",
-                Date.valueOf("1990-03-01")
-        );
-        personRepository.savePerson(person);
+            @Valid @RequestBody PersonSaveRequest personSaveRequest
+    ) {
+        personRepository.savePerson(new Person(
+                personSaveRequest.getId(),
+                personSaveRequest.getName(),
+                personSaveRequest.getBirthdate()
+        ));
 
         return ResponseEntity.ok().build();
     }
-
 }
