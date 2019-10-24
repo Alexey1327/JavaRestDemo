@@ -46,10 +46,4 @@ public class CarController {
 
         return ResponseEntity.ok().build();
     }
-
-    @GetMapping("personwithcars")
-    public ResponseEntity personAndCarsAction()
-    {
-        return ResponseEntity.ok().build();
-    }
 }
