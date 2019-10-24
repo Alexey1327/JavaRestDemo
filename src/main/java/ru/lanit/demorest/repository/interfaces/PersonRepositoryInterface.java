@@ -7,4 +7,6 @@ public interface PersonRepositoryInterface {
     void savePerson(Person person);
 
     Person getById(Long peopleId);
+
+    Long countAll();
 }
