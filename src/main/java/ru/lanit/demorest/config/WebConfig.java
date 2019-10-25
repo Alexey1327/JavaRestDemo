@@ -8,6 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -24,6 +25,11 @@ import java.util.Properties;
 @EnableWebMvc
 @ComponentScan("ru.lanit.demorest")
 @PropertySource(value = { "classpath:application.properties" })
+@EnableJpaRepositories(
+        entityManagerFactoryRef = "domainsEntityManager",
+        transactionManagerRef = "domainsTransactionManager",
+        basePackages  = {"ru.lanit.demorest.repository.interfaces"}
+)
 @EnableTransactionManagement
 public class WebConfig implements WebMvcConfigurer {
 
