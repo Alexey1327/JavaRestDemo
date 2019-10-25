@@ -1,5 +1,6 @@
 package ru.lanit.demorest.request;
 
+import ru.lanit.demorest.request.validators.CarModelValid;
 import ru.lanit.demorest.request.validators.CarNotExists;
 import ru.lanit.demorest.request.validators.PersonExists;
 import ru.lanit.demorest.request.validators.PersonIsAdult;
@@ -14,6 +15,7 @@ public class CarSaveRequest {
     private long id;
 
     @NotNull
+    @CarModelValid
     private String model;
 
     @NotNull @Min(1)

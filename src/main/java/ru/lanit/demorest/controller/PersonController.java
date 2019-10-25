@@ -44,9 +44,9 @@ public class PersonController {
     @GetMapping("personwithcars")
     @ResponseBody
     @Transactional
-    public ResponseEntity personAndCarsAction(@RequestParam Long personId)
+    public ResponseEntity personAndCarsAction(@RequestParam Long personid)
     {
-        Person person = personRepository.getById(personId);
+        Person person = personRepository.getById(personid);
 
         if (person == null) {
             return ResponseEntity.notFound().build();
@@ -56,8 +56,7 @@ public class PersonController {
         for (Car car : person.getCarList()) {
             carDtoList.add(new CarDto(
                 car.getId(),
-                car.getVendor(),
-                car.getModel(),
+                car.getVendor() + "-" + car.getModel(),
                 car.getHorsePower()
             ));
         }

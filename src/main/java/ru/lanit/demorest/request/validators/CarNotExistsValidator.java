@@ -17,7 +17,7 @@ public class CarNotExistsValidator implements ConstraintValidator<CarNotExists, 
     @Override
     @Transactional
     public boolean isValid(Long id, ConstraintValidatorContext constraintValidatorContext) {
-        if (id != null) {
+        if (id != null && id != 0) {
             return carRepository.getById(id) == null;
         } else {
             return false;

@@ -17,7 +17,7 @@ public class PersonNotExistsValidator implements ConstraintValidator<PersonNotEx
     @Override
     @Transactional
     public boolean isValid(Long personId, ConstraintValidatorContext constraintValidatorContext) {
-        if (personId != null) {
+        if (personId != null && personId != 0) {
             return personRepository.getById(personId) == null;
         } else {
             return false;
