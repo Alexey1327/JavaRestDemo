@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @ComponentScan(value={"ru.lanit.demorest"})
-public class AppConfiguration {
+public class AppConfig {
 	
 	
 }
