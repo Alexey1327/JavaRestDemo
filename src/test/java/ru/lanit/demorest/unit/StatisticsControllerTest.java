@@ -8,7 +8,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import ru.lanit.demorest.config.AppConfig;
-import ru.lanit.demorest.controller.StatController;
+import ru.lanit.demorest.intergration.StatController;
 
 import static org.junit.Assert.assertEquals;
 

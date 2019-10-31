@@ -1,4 +1,4 @@
-package ru.lanit.demorest.controller;
+package ru.lanit.demorest.intergration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +13,7 @@ import ru.lanit.demorest.request.PersonSaveRequest;
 import ru.lanit.demorest.request.validators.DateValidator;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,11 +33,17 @@ public class PersonController {
     public ResponseEntity personSaveAction(
             @Valid @RequestBody PersonSaveRequest personSaveRequest
     ) {
-        personRepository.savePerson(new Person(
-                personSaveRequest.getId(),
-                personSaveRequest.getName(),
-                personSaveRequest.getBirthdate()
-        ));
+        try {
+            LocalDate birthDate = LocalDate.parse(personSaveRequest.getBirthdate(), DateTimeFormatter.ofPattern(DateValidator.EUROPEAN_DATE_PATTERN));
+            personRepository.savePerson(new Person(
+                    personSaveRequest.getId(),
+                    personSaveRequest.getName(),
+                    birthDate
+            ));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
+
 
         return ResponseEntity.ok().build();
     }
