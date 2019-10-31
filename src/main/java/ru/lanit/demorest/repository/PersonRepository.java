@@ -26,6 +26,7 @@ public class PersonRepository implements PersonRepositoryInterface {
     }
 
     @Override
+    @Transactional
     public void savePerson(Person person) {
         getSession().save(person);
     }
@@ -36,6 +37,7 @@ public class PersonRepository implements PersonRepositoryInterface {
     }
 
     @Override
+    @Transactional
     public Long countAll() {
         BigInteger result = (BigInteger) getSession().createNativeQuery("SELECT COUNT(1) AS cnt FROM person").getSingleResult();
 
@@ -43,6 +45,7 @@ public class PersonRepository implements PersonRepositoryInterface {
     }
 
     @Override
+    @Transactional
     public void deleteAll() {
         getSession().createNativeQuery("DELETE from person").executeUpdate();
     }
