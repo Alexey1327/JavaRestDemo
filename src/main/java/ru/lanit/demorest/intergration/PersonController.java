@@ -33,17 +33,11 @@ public class PersonController {
     public ResponseEntity personSaveAction(
             @Valid @RequestBody PersonSaveRequest personSaveRequest
     ) {
-        try {
-            LocalDate birthDate = LocalDate.parse(personSaveRequest.getBirthdate(), DateTimeFormatter.ofPattern(DateValidator.EUROPEAN_DATE_PATTERN));
-            personRepository.savePerson(new Person(
-                    personSaveRequest.getId(),
-                    personSaveRequest.getName(),
-                    birthDate
-            ));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
-        }
-
+        personRepository.savePerson(new Person(
+                personSaveRequest.getId(),
+                personSaveRequest.getName(),
+                LocalDate.parse(personSaveRequest.getBirthdate(), DateTimeFormatter.ofPattern(DateValidator.EUROPEAN_DATE_PATTERN))
+        ));
 
         return ResponseEntity.ok().build();
     }

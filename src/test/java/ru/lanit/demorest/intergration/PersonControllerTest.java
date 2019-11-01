@@ -51,7 +51,9 @@ public class PersonControllerTest {
 
     @Before
     public void setup() {
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
+        this.mockMvc = MockMvcBuilders
+                .webAppContextSetup(wac)
+                .build();
         this.objectMapper = Jackson2ObjectMapperBuilder.json().build();
     }
 
@@ -106,8 +108,8 @@ public class PersonControllerTest {
 
         PersonSaveRequest request = new PersonSaveRequest()
                 .setId((long) 1)
-                .setName("Person 1")
-                .setBirthdate("10-10-1990");
+                .setName(null)
+                .setBirthdate(null);
 
         ResultActions resultActions = mockMvc.perform(
                 post("/person")
@@ -117,5 +119,4 @@ public class PersonControllerTest {
 
         resultActions.andExpect(status().isBadRequest());
     }
-
 }
