@@ -63,7 +63,7 @@ public class CarControllerTest {
         Person person = personRepository.getById((long)1);
 
         if (person == null) {
-            person = new Person((long)1, "Person 1", LocalDate.now());
+            person = new Person((long)1, "Person 1", LocalDate.now().minusYears(20));
             personRepository.savePerson(person);
         }
 
