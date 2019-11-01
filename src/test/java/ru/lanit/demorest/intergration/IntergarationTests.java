@@ -59,44 +59,6 @@ public class IntergarationTests {
     }
 
     @Test
-    @Transactional
-    public void testPersonWithCarsAction() throws Exception {
-
-        long personId = 2;
-        long carId = 2;
-
-        PersonSaveRequest request = new PersonSaveRequest()
-                .setId(personId)
-                .setName("Person 2")
-                .setBirthdate(LocalDate.now().minusYears(20).format(DateTimeFormatter.ofPattern(DateValidator.EUROPEAN_DATE_PATTERN)));
-
-        ResultActions resultActions1 = mockMvc.perform(
-                post("/person")
-                        .content(objectMapper.writeValueAsString(request))
-                        .contentType(MediaType.APPLICATION_JSON)
-        );
-
-        resultActions1.andExpect(status().isOk());
-
-        CarSaveRequest carSaveRequest = new CarSaveRequest()
-                .setId(carId)
-                .setModel("Lada-Granta")
-                .setHorsepower(100)
-                .setOwnerId(personId);
-
-        ResultActions resultActions2 = mockMvc.perform(
-                post("/car")
-                        .content(objectMapper.writeValueAsString(carSaveRequest))
-                        .contentType(MediaType.APPLICATION_JSON)
-        );
-        resultActions2.andExpect(status().isOk());
-
-        mockMvc.perform(get("/personwithcars").param("personid", String.valueOf(personId)))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").value((int) personId));
-    }
-
-    @Test
     public void testPersonSaveSuccess() throws Exception {
 
         long personId = 1;
@@ -134,5 +96,49 @@ public class IntergarationTests {
         );
 
         resultActions.andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void testPersonWithCarsAction() throws Exception {
+
+        long personId = 1;
+        long carId = 1;
+
+        mockMvc.perform(
+                get("/clear")
+        ).andExpect(status().isOk());
+
+        PersonSaveRequest request = new PersonSaveRequest()
+                .setId(personId)
+                .setName("Person 2")
+                .setBirthdate(LocalDate.now().minusYears(20).format(DateTimeFormatter.ofPattern(DateValidator.EUROPEAN_DATE_PATTERN)));
+
+        mockMvc.perform(
+                post("/person")
+                        .content(objectMapper.writeValueAsString(request))
+                        .contentType(MediaType.APPLICATION_JSON)
+        ).andExpect(status().isOk());
+
+        CarSaveRequest carSaveRequest = new CarSaveRequest()
+                .setId(carId)
+                .setModel("Lada-Granta")
+                .setHorsepower(100)
+                .setOwnerId(personId);
+
+        mockMvc.perform(
+                post("/car")
+                        .content(objectMapper.writeValueAsString(carSaveRequest))
+                        .contentType(MediaType.APPLICATION_JSON)
+        ).andExpect(status().isOk());
+
+        ResultActions resultActions = mockMvc.perform(get("/personwithcars").param("personid", String.valueOf(personId)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value((int) personId));
+
+        mockMvc.perform(get("/statistics"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.personcount").value(1))
+                .andExpect(jsonPath("$.carcount").value(1))
+                .andExpect(jsonPath("$.uniquevendorcount").value(1));
     }
 }

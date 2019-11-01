@@ -32,6 +32,7 @@ public class CarRepository implements CarRepositoryInterface {
     }
 
     @Override
+    @Transactional
     public Car getById(Long carId) {
         return getSession().get(Car.class, carId);
     }

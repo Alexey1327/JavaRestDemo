@@ -32,6 +32,7 @@ public class PersonRepository implements PersonRepositoryInterface {
     }
 
     @Override
+    @Transactional
     public Person getById(Long peopleId) {
         return getSession().get(Person.class, peopleId);
     }
