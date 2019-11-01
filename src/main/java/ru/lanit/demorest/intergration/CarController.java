@@ -1,4 +1,4 @@
-package ru.lanit.demorest.controller;
+package ru.lanit.demorest.intergration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

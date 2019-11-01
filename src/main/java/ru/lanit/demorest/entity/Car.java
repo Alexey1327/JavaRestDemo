@@ -1,9 +1,10 @@
 package ru.lanit.demorest.entity;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
-@Table(name = "car", schema = "db_test_rest")
+@Table(name = "car")
 public class Car {
 
     @Id
@@ -72,5 +73,18 @@ public class Car {
 
     public void setPerson(Person person) {
         this.person = person;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Car car = (Car) o;
+        return id.equals(car.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

@@ -1,4 +1,4 @@
-package ru.lanit.demorest.controller;
+package ru.lanit.demorest.intergration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +13,7 @@ import ru.lanit.demorest.request.PersonSaveRequest;
 import ru.lanit.demorest.request.validators.DateValidator;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +36,7 @@ public class PersonController {
         personRepository.savePerson(new Person(
                 personSaveRequest.getId(),
                 personSaveRequest.getName(),
-                personSaveRequest.getBirthdate()
+                LocalDate.parse(personSaveRequest.getBirthdate(), DateTimeFormatter.ofPattern(DateValidator.EUROPEAN_DATE_PATTERN))
         ));
 
         return ResponseEntity.ok().build();
@@ -53,12 +54,14 @@ public class PersonController {
         }
 
         List<CarDto> carDtoList = new ArrayList<>();
-        for (Car car : person.getCarList()) {
-            carDtoList.add(new CarDto(
-                car.getId(),
-                car.getVendor() + "-" + car.getModel(),
-                car.getHorsePower()
-            ));
+        if (person.getCarList() != null) {
+            for (Car car : person.getCarList()) {
+                carDtoList.add(new CarDto(
+                        car.getId(),
+                        car.getVendor() + "-" + car.getModel(),
+                        car.getHorsePower()
+                ));
+            }
         }
 
         return ResponseEntity.ok(new PersonDto(

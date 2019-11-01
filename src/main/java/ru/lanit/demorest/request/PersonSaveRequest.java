@@ -1,5 +1,6 @@
 package ru.lanit.demorest.request;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import ru.lanit.demorest.request.validators.DateIsValid;
 import ru.lanit.demorest.request.validators.DateValidator;
 import ru.lanit.demorest.request.validators.PersonNotExists;
@@ -29,7 +30,26 @@ public class PersonSaveRequest {
         return name;
     }
 
-    public LocalDate getBirthdate() {
-        return LocalDate.parse(birthdate, DateTimeFormatter.ofPattern(DateValidator.EUROPEAN_DATE_PATTERN));
+    public String getBirthdate() {
+
+        return birthdate;
+    }
+
+    public PersonSaveRequest setId(Long id) {
+        this.id = id;
+
+        return this;
+    }
+
+    public PersonSaveRequest setName(String name) {
+        this.name = name;
+
+        return this;
+    }
+
+    public PersonSaveRequest setBirthdate(String birthdate) {
+        this.birthdate = birthdate;
+
+        return this;
     }
 }

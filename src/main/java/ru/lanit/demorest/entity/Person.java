@@ -3,9 +3,10 @@ package ru.lanit.demorest.entity;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
-@Table(name = "person", schema = "db_test_rest")
+@Table(name = "person")
 public class Person {
 
     @Id
@@ -61,5 +62,18 @@ public class Person {
 
     public void setCarList(List<Car> carList) {
         this.carList = carList;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return id == person.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

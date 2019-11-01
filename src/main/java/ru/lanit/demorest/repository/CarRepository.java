@@ -32,11 +32,13 @@ public class CarRepository implements CarRepositoryInterface {
     }
 
     @Override
+    @Transactional
     public Car getById(Long carId) {
         return getSession().get(Car.class, carId);
     }
 
     @Override
+    @Transactional
     public Long countAll() {
         BigInteger result = (BigInteger) getSession().createNativeQuery("SELECT COUNT(1) AS cnt FROM car").getSingleResult();
 
@@ -44,6 +46,7 @@ public class CarRepository implements CarRepositoryInterface {
     }
 
     @Override
+    @Transactional
     public Long uniqueVendorCountAll() {
         BigInteger result = (BigInteger) getSession().createNativeQuery("SELECT COUNT(1) FROM (SELECT DISTINCT vendor from car) t").getSingleResult();
 
@@ -51,6 +54,7 @@ public class CarRepository implements CarRepositoryInterface {
     }
 
     @Override
+    @Transactional
     public void deleteAll() {
         getSession().createNativeQuery("DELETE from car").executeUpdate();
     }

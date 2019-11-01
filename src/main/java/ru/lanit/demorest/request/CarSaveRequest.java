@@ -31,6 +31,7 @@ public class CarSaveRequest {
 
     public CarSaveRequest setId(long id) {
         this.id = id;
+
         return this;
     }
 
@@ -50,6 +51,7 @@ public class CarSaveRequest {
 
     public CarSaveRequest setHorsepower(int horsepower) {
         this.horsepower = horsepower;
+
         return this;
     }
 
@@ -59,6 +61,7 @@ public class CarSaveRequest {
 
     public CarSaveRequest setOwnerId(long ownerId) {
         this.ownerId = ownerId;
+
         return this;
     }
 }
